@@ -28,7 +28,7 @@ const Login = () => {
             if(error.response && !error.response.data.success){
               setError(error.response.data.error)
             }else{
-              setError("Changed from dev branch : Server Error")
+              setError("Changed again from dev branch : Server Error")
             }
         }
     }
