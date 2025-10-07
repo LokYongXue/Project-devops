@@ -1,0 +1,48 @@
+#name of the work flow
+name: build-and-lint
+
+#defined when this workflow runs
+on:
+  push:  #when push to these branches
+    branches: [main, dev]
+  pull_request: #when pull from these branches
+    branches: [main, dev]
+
+#defined the job
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+
+      # 🧩 Backend
+      - name: Install backend deps
+        working-directory: server
+        run: npm ci
+
+      - name: Lint backend
+        working-directory: server
+        run: npm run lint -- --max-warnings=0
+
+      # 🧩 Frontend
+      - name: Install frontend deps
+        working-directory: frontend
+        run: npm ci
+
+      - name: Lint frontend
+        working-directory: frontend
+        run: npm run lint -- --max-warnings=0
+
+      # 🐳 Docker builds
+      - name: Build backend Docker image
+        run: docker build -t backend ./server
+
+      - name: Build frontend Docker image
+        run: docker build -t frontend ./frontend

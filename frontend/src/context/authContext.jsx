@@ -1,8 +1,8 @@
 import axios from 'axios'
 import React, { Children, createContext, useContext, useEffect, useState } from 'react'
 
-const userContext = createContext()
-const authContext = ({children}) => {
+const UserContext = createContext()
+const AuthContextProvider = ({children}) => {
 
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
@@ -44,11 +44,11 @@ const authContext = ({children}) => {
     }
 
   return (  //any component inside <UserContext.Provider> can access user without props
-    <userContext.Provider value={{user, login, logout, loading}}>
+    <UserContext.Provider value={{user, login, logout, loading}}>
         {children}
-    </userContext.Provider>
+    </UserContext.Provider>
   )
 }
 
-export const useAuth = () => useContext(userContext)
-export default authContext   //provider component wrap the data so globlally available
+export const useAuth = () => useContext(UserContext)
+export default AuthContextProvider   //provider component wrap the data so globlally available

@@ -5,7 +5,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --env-file=.env index.js"
+    "start": "nodemon --env-file=.env index.js",
+    "lint": "eslint . --ext .js,.jsx",
+    "lint:fix": "eslint . --ext .js,.jsx --fix",
+    "format": "prettier --write ."
   },
   "keywords": [],
   "author": "",
@@ -20,5 +23,9 @@
     "multer": "^2.0.2",
     "nodemon": "^3.1.10",
     "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "eslint": "^9.37.0",
+    "prettier": "^3.6.2"
   }
 }
