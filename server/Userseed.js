@@ -1,6 +1,7 @@
 import User from './models/User.js';
 import bcrypt from 'bcrypt';
 import connectToDb from './db/db.js';
+import mongoose from 'mongoose'; 
 
 const userRegister = async () => {
   await connectToDb();
@@ -12,9 +13,13 @@ const userRegister = async () => {
       password: hashPassword,
       role: 'admin',
     });
-    newUser.save();
+    await newUser.save();
+    console.log('Admin user created successfully!');
   } catch (error) {
     console.log(error);
+  }finally{
+    await mongoose.connection.close();
+    console.log('MongoDB connection closed.');
   }
 };
 
