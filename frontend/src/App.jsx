@@ -4,7 +4,7 @@ import Login from "./pages/Login.jsx";
 import EmployeeDashboard from "./pages/EmployeeDashboard.jsx";
 
 function App() {
-  let testing1 = "unused variable";
+  //let testing1 = "unused variable";
   return (
    <BrowserRouter>
       <Routes> 
