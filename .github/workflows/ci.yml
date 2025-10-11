@@ -77,8 +77,7 @@ jobs:
             cd ${EC2_APP_DIR}
             echo '✅ Current directory:' && pwd
             echo '📁 Contents:' && ls -la
-            echo '🔍 Checking Git repository:' && ls -la .git || echo '.git missing'
-
+            
             # Fetch latest code
             git fetch --all
             git reset --hard origin/main
