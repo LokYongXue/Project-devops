@@ -39,7 +39,7 @@ const Login = () => {
       <form onSubmit={handleSubmit}
       className="bg-white p-8 rounded-2xl shadow-md w-96">
         <h2 className="text-2xl font-bold text-gray-700 mb-2">
-          Employee Management System
+          Employee Management System Edited-123
         </h2>
         <h3 className="text-lg text-gray-500 mb-6">Login</h3>
         {error && <p className="text-red-500">{error}</p>}
