@@ -72,9 +72,13 @@ jobs:
           EC2_USER: ${{ secrets.EC2_USER }}
           EC2_APP_DIR: ${{ secrets.EC2_APP_DIR }}
         run: |
-          ssh -i ec2_key.pem ${EC2_USER}@${EC2_HOST} << 'EOF'
+          ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${EC2_USER}@${EC2_HOST} "
             set -e
-            cd "${EC2_APP_DIR}" || exit 1
+            cd ${EC2_APP_DIR}
+            echo '✅ Current directory:' && pwd
+            echo '📁 Contents:' && ls -la
+            echo '🔍 Checking Git repository:' && ls -la .git || echo '.git missing'
+
             # Fetch latest code
             git fetch --all
             git reset --hard origin/main
@@ -87,4 +91,4 @@ jobs:
 
             # Check running containers
             docker compose ps
-          EOF
+          "
